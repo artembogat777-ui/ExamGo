@@ -1,0 +1,64 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN:?Set BOT_TOKEN in .env}
+      BOT_USERNAME: ${BOT_USERNAME:-}
+      ADMIN_ID: ${ADMIN_ID:-0}
+      DEV: "0"
+      DB_PATH: /data/app.db
+      SETTINGS_PATH: /app/settings.json
+    expose:
+      - "8000"
+    volumes:
+      - app_data:/data
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  bot:
+    build: .
+    command: ["python", "bot.py"]
+    restart: unless-stopped
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN:?Set BOT_TOKEN in .env}
+      BOT_USERNAME: ${BOT_USERNAME:-}
+      ADMIN_ID: ${ADMIN_ID:-0}
+      WEBAPP_URL: https://${DOMAIN:?Set DOMAIN in .env}
+      DB_PATH: /data/app.db
+      SETTINGS_PATH: /app/settings.json
+    depends_on:
+      web:
+        condition: service_healthy
+    volumes:
+      - app_data:/data
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    environment:
+      DOMAIN: ${DOMAIN:?Set DOMAIN in .env}
+    depends_on:
+      web:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  app_data:
+  caddy_data:
+  caddy_config:

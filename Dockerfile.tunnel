@@ -1,0 +1,8 @@
+FROM cloudflare/cloudflared:latest AS cloudflared
+
+FROM python:3.12-slim
+
+COPY --from=cloudflared /usr/local/bin/cloudflared /usr/local/bin/cloudflared
+WORKDIR /app
+COPY tools/run_tunnel.py ./tools/run_tunnel.py
+CMD ["python", "tools/run_tunnel.py"]

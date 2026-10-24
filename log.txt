@@ -1,0 +1,52 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+PS C:\Users\BOSS> docker compose -f docker-compose.dev.yml up --build
+compose file "C:\\Users\\BOSS\\docker-compose.dev.yml" is invalid: open C:\Users\BOSS\docker-compose.dev.yml: The system cannot find the file specified.
+
+What's next:
+    Debug this Compose error with Gordon → docker ai "help me fix this compose error"
+PS C:\Users\BOSS> docker compose -f docker-compose.dev.yml up --build
+compose file "C:\\Users\\BOSS\\docker-compose.dev.yml" is invalid: open C:\Users\BOSS\docker-compose.dev.yml: The system cannot find the file specified.
+
+What's next:
+    Debug this Compose error with Gordon → docker ai "help me fix this compose error"
+PS C:\Users\BOSS> cd .\Desktop\exam-miniapp\
+PS C:\Users\BOSS\Desktop\exam-miniapp> ls
+
+
+    Directory: C:\Users\BOSS\Desktop\exam-miniapp
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        21.10.2026      1:30                .idea
+d-----        16.10.2026     23:31                .venv
+d-----        20.10.2026     23:39                content
+d-----        21.10.2026      1:32                deploy
+d-----        20.10.2026     23:39                server
+d-----        21.10.2026     14:22                tasks
+d-----        21.10.2026      0:13                tests
+d-----        21.10.2026     20:19                tools
+d-----        20.10.2026     23:39                webapp
+d-----        21.10.2026      0:41                __pycache__
+-a----        21.10.2026      1:32             90 .dockerignore
+-a----        21.10.2026     20:19             39 .env.example
+-a----        21.10.2026      1:32             92 .gitignore
+-a----        21.10.2026     14:33         475136 app.db
+-a----        21.10.2026      0:42           7310 bot.py
+-a----        21.10.2026     20:19           1334 docker-compose.dev.yml
+-a----        21.10.2026      1:32           1528 docker-compose.yml
+-a----        21.10.2026      1:32            427 Dockerfile
+-a----        21.10.2026     20:19            256 Dockerfile.tunnel
+-a----        21.10.2026     20:20          13706 README.md
+-a----        20.10.2026     23:39             42 requirements.txt
+-a----        21.10.2026     12:57            867 settings.json
+
+
+PS C:\Users\BOSS\Desktop\exam-miniapp> docker compose -f docker-compose.dev.yml up --build
+error while interpolating services.bot.environment.BOT_TOKEN: required variable BOT_TOKEN is missing a value: Create .env from .env.example and set BOT_TOKEN
+error while interpolating services.web.environment.BOT_TOKEN: required variable BOT_TOKEN is missing a value: Create .env from .env.example and set BOT_TOKEN
+
+What's next:
+    Debug this Compose error with Gordon → docker ai "help me fix this compose error"
